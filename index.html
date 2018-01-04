@@ -17,9 +17,9 @@
 	<!-- Navigation and search bar feature -->
 	<nav class="navbar navbar-inverse navbar-fixed-top"> 
 		<div class="container-fluid">
-			<div class="navbar-header pull-left">
-				<a class="navbar-brand"><h1>Are You Hungry?</h1></a>
-			</div>
+			<form class="navbar-form navbar-left" role="search">
+				<input type="text" data-bind="value: search, valueUpdate: 'afterkeydown'" class="form-control pull-left" placeholder="What should we eat?">
+			</form>
 			<button class="btn btn-primary food" type="button" data-toggle="collapse"
 			data-target="#wrapper" aria-expanded="true">&#9776;</button>
 		</div>
@@ -27,10 +27,15 @@
 
 	<!-- sidebar with list of yelp search -->
 	<div id="wrapper" aria-expanded="true" class="collapse in">
-		<div id="list-sidebar" class="col-sm-3 col-md-3 text-justfiy sidebar">
-			<ul id="listed-items" class="nav nav-sidebar text-justfiy">
+		<div id="list-sidebar" class="col-sm-3 col-md-2 text-justify sidebar">
+			<ul id="listed-items" class="nav nav-sidebar text-justify">
+				<li>
+					<span data-bind="text:name"></span>
+				</li>
+
 			</ul>
 		</div>
+		
 	</div>
 
 	<div id="map"></div>
