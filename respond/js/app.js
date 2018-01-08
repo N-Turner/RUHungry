@@ -161,46 +161,11 @@ function mapError() {
 	console.log("Sorry, Google Maps had a problem loading");
 };
 
-function foodMarkers() {
-
-    var defaultIcon = markerIcon('ff4000');
-
-    // Highligh icon during hover
-    var highlightedIcon = markerIcon('e7b213');
-    // Create info window
-    var mapInfoWindow = new google.maps.InfoWindow();
-    // Loop through locations array in our view model
-    vm.places().forEach(function (place, i)) {
-        var title = place.title
-        var rating = place.rating;
-        var lat = place.location.latitude;
-        var lng = place.location.longitude;
-        var position = new google.maps.LatLng(lat, lng);
-
-        var marker = new.google.maps.Marker({
-            title: title,
-            rating: rating,
-            position: position,
-            animation: google.maps.Animation.Drop,
-            icon: defaultIcon,
-            map: map,
-            id: i
-        });
-
-    }
-
-
-}
-
 var ViewModel = function() {
 	var self = this;
 	// search bar
-	self.title = ko.observable();
-    self.location = ko.observable();
+	this.search = ko.observable('');
 
 };
 
-
-var vm = new ViewModel(); 
-
-ko.applyBindings(vm);
+ko.applyBindings(new ViewModel());

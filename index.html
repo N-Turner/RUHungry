@@ -28,7 +28,7 @@
 	<!-- sidebar with list of yelp search -->
 	<div id="wrapper" aria-expanded="true" class="collapse in">
 		<div id="list-sidebar" class="col-sm-3 col-md-2 text-justify sidebar">
-			<ul id="listed-items" class="nav nav-sidebar text-justify">
+			<ul id="listed-items" class="nav nav-sidebar text-justify" data-bind="foreach: filterYelp">
 				<li>
 					<span data-bind="text:name"></span>
 				</li>
