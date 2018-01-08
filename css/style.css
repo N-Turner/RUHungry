@@ -36,7 +36,9 @@ h1 {
     height: 100%;
 }
 
-
+#map-list {
+    list-style-type: none;
+}
 
 
 

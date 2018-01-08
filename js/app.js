@@ -152,7 +152,7 @@ function initMap() {
           mapTypeControl: false
         });
 
-
+        console.log("init map");
 }
 
 //Error handling for Google Maps
@@ -170,14 +170,14 @@ function foodMarkers() {
     // Create info window
     var mapInfoWindow = new google.maps.InfoWindow();
     // Loop through locations array in our view model
-    vm.places().forEach(function (place, i)) {
+    vm.places().forEach(function (place, i) {
         var title = place.title
         var rating = place.rating;
         var lat = place.location.latitude;
         var lng = place.location.longitude;
         var position = new google.maps.LatLng(lat, lng);
 
-        var marker = new.google.maps.Marker({
+        var marker = new google.maps.Marker({
             title: title,
             rating: rating,
             position: position,
@@ -187,17 +187,73 @@ function foodMarkers() {
             id: i
         });
 
-    }
+        markers.push(marker);
+
+        place.marker = marker;
+
+        marker.addListener('click', function() {
+            populateInfoWindow(this, mapInfoWindow);
+        });
+
+        // Alternate between highlighted place marker and non-highlighted
+        marker.addListener('mouseover', function() {
+            this.setIcon(highlightedIcon);
+        });
+        marker.addListener('mouseout', function() {
+            this.setIcon(defaultIcon);
+        });
+
+    });
+    console.log(markers);
+}
 
 
+
+// Create a new marker
+function markerIcon(markerStyle) {
+    var markerImage = new google.maps.MarkerImage('http://chart.googleapis.com/chart?chst=d_map_spin&chld=1.15|0|' +
+        markerStyle +
+        '|40|_|%E2%80%A2',
+        new google.maps.Size(21, 34),
+        new google.maps.Point(0, 0),
+        new google.maps.Point(10, 34),
+        new google.maps.Size(21, 34));
+    return markerImage;
 }
 
 var ViewModel = function() {
+    console.log("ViewModel Loaded");
 	var self = this;
-	// search bar
+	
 	self.title = ko.observable();
     self.location = ko.observable();
+    self.places = ko.observableArray();
+    self.rating = ko.observable();
+    self.id = ko.observable();
+    self.markers = ko.observableArray(markers);
+    self.filter = ko.observable();
+    self.address = ko.observable();
 
+    // Filter search query in the Are You Hungry Field
+    this.listFilter = ko.computed(function() {
+        return this.places().filter(function(place) {
+            var placematch = !self.filter() || place.title.toLowerCase().indexOf(self.filter().toLowerCase()) !== -1;
+            var id = Number(place.id);
+            if (markers[id]) {
+                markers[id].setVisible(placematch);
+            }
+            if (placematch) {
+                return place;
+            }
+        });
+    }, this);
+
+    self.zoomIn = function() {
+        var id = this.id;
+        map.setCenter(markers[id].position);
+        map.setZoom(15);
+        google.maps.event.trigger(markers[id], 'click');
+    };
 };
 
 
