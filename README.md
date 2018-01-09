@@ -1,6 +1,6 @@
 # Are You Hungry App
 ---
-This single page application uses the Google Maps, JavaScript API, Yelp's Fusion API, and KnockoutJS library for an interactive map showing the top rated restaurants near Honolulu, Hawaii. The marker info windows provide the rating and street view imagery for each place.
+This single page application uses the Google Maps, JavaScript API, Yelp's Fusion API, and KnockoutJS library for an interactive map showing the top rated restaurants near Honolulu, Hawaii. The marker info windows provide the rating, price index, and street view imagery for each place. 
  
 
 ### How to Use
@@ -14,5 +14,5 @@ This single page application uses the Google Maps, JavaScript API, Yelp's Fusion
 ---
 - Google Maps Javascript API
 - Google Maps Geocoding API
-- Yelp API
+- Yelp Fusion API
 
