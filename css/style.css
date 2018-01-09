@@ -6,14 +6,6 @@ body {
     padding-top: 25px;
 }
 
-h1 {
-    color: #525454;
-    font-size: 22px;
-    margin: 0 0 10px 0;
-    text-align: center;
-    color: white;
-}
-
 /* Sidebar */
 #list-sidebar {
     background-color: white;
@@ -51,6 +43,24 @@ span:hover {
     line-height: 0.9;
     cursor: pointer;
     background-color: yellow;
+    font-size: 115%;
 }
 
+/**** Media Query ****/
+
+@media screen and (max-width: 768px) {
+    body {
+        padding-top: 100px;
+    }
+}
+@media screen and (min-width: 768px) {
+    body {
+      padding-top: 25px;
+    }
+}
+@media screen and (min-width: 768px) and (min-height: 720px) {
+    #list-sidebar {
+      height: 100vh;
+    }
+}
 
