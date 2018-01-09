@@ -206,10 +206,15 @@ function foodMarkers() {
         marker.addListener('mouseout', function() {
             this.setIcon(defaultIcon);
         });
+        google.maps.event.addListener(map, 'click', function() {
+            mapInfoWindow.close();
+        });
 
     });
     console.log(markers);
-}
+
+    };
+
 
 function populateInfoWindow(marker, infowindow) {
 
@@ -294,16 +299,18 @@ var ViewModel = function() {
     // Filter search query in the Are You Hungry Field
     this.listFilter = ko.computed(function() {
         return this.places().filter(function(place) {
-            var placematch = !self.filter() || place.title.toLowerCase().indexOf(self.filter().toLowerCase()) !== -1;
+            var doesMatch = !self.filter() || place.title.toLowerCase().indexOf(self.filter()) >= 0;
+
             var id = Number(place.id);
             if (markers[id]) {
-                markers[id].setVisible(placematch);
+                markers[id].setVisible(doesMatch);
             }
-            if (placematch) {
+            if (doesMatch) {
                 return place;
             }
         });
     }, this);
+        
 
     self.zoomIn = function() {
         var id = this.id;
