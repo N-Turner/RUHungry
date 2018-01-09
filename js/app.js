@@ -4,7 +4,6 @@ var map;
 var markers = [];
 
 var placeMarkers = [];
-var photos = [""];
 
 // Init new google map
 function initMap() {
@@ -317,6 +316,17 @@ var ViewModel = function() {
         map.setCenter(markers[id].position);
         map.setZoom(15);
         google.maps.event.trigger(markers[id], 'click');
+    };
+
+    //add css when <li> is clicked
+    this.clickedYelp = ko.observable();
+    //data-bind: Click event for listed items in side bar view.
+    //Open marker infowindow to corresponding marker from the list
+    this.selectYelp = function (click) {
+        self.clickedYelp(click);
+        if (click != null) {
+            self.clickedYelp()
+        }
     };
 };
 

@@ -22,6 +22,7 @@ h1 {
 
 #listed-items {
     padding: 10px 0;
+
 }
 
 .food {
@@ -45,6 +46,19 @@ h1 {
         width: 200px;
     }
 
+.clickedYelp {
+    font-weight: bold;
+    font-size: 1.3em;
+    color: #0CBB06
+    background-color: yellow;
+}
 
+span:hover {
+    text-align: center 
+    color: #AD2324 
+    line-height: 0.9;
+    cursor: pointer;
+    background-color: yellow;
+}
 
 

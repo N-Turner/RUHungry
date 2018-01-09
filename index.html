@@ -28,7 +28,7 @@
 		<div id="list-sidebar" class="col-sm-3 col-md-2 text-justify sidebar">
 			<ul id="listed-items" class="nav nav-sidebar text-justify" data-bind="foreach: listFilter">
 				<li>
-					<span data-bind="click: $parent.zoomIn, text: title" id="maplist-item"></span>
+					<span data-bind="click: $parent.zoomIn, text: title, css: {clickedYelp: $data == $root.clickedYelp() }"></span>
 				</li>
 
 			</ul>

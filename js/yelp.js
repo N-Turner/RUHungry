@@ -1,5 +1,6 @@
-
+// Yelp has phased out v2 of it's API with Yelp Fusion. This Udacity forum was very helpful: https://discussions.udacity.com/t/yelp-v3-implementation/235928
 // Get location data from Yelp via an API call
+// Filter for food places based on the Hawaii location near Honolulu.
 var yelp_url = 'https://api.yelp.com/v3/businesses/search?term=restaurants&latitude=21.280945&longitude=-157.813963';
 
 // Proxy to bypass CORS restriction on Yelp API
@@ -10,7 +11,7 @@ var settings = {
   "crossDomain": true,
   "url": cors_anywhere_url + yelp_url,
   "method": "GET",
-  "headers": {
+  "headers": { // Paste your Yelp API key after 'Bearer'.
     "authorization": "Bearer psS0DaOMtb2S1-G5yZMfsLEp-ZXj-Z0JH9Tn-X0td730Ot5RBJb0qx4demwiFtAy33QJuUsXY9PuzU3arI65x_RxEgEMA4sYX_jg0d7dUJsiA6uMxvdlB8VByk5MWnYx",
     "cache-control": "no-cache",
   }
