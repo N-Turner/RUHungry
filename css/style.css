@@ -32,7 +32,6 @@ h1 {
     border-color: black;
 }
 
-
 #map {
     height: 100%;
 }
@@ -45,13 +44,6 @@ h1 {
         height: 200px;
         width: 200px;
     }
-
-.clickedYelp {
-    font-weight: bold;
-    font-size: 1.3em;
-    color: #0CBB06
-    background-color: yellow;
-}
 
 span:hover {
     text-align: center 

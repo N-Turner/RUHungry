@@ -318,16 +318,7 @@ var ViewModel = function() {
         google.maps.event.trigger(markers[id], 'click');
     };
 
-    //add css when <li> is clicked
-    this.clickedYelp = ko.observable();
-    //data-bind: Click event for listed items in side bar view.
-    //Open marker infowindow to corresponding marker from the list
-    this.selectYelp = function (click) {
-        self.clickedYelp(click);
-        if (click != null) {
-            self.clickedYelp()
-        }
-    };
+    
 };
 
 
