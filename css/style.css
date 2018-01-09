@@ -40,6 +40,11 @@ h1 {
     list-style-type: none;
 }
 
+#pano {
+        height: 200px;
+        width: 200px;
+    }
+
 
 
 

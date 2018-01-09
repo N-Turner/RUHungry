@@ -28,6 +28,7 @@ $.ajax(settings).done(function(response) {
 			title: food[i].name, 
 			location: food[i].coordinates,
 			rating: food[i].rating,
+			price: food[i].price,
 			id: i
 		});
 	}

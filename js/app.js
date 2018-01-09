@@ -4,6 +4,7 @@ var map;
 var markers = [];
 
 var placeMarkers = [];
+var photos = [""];
 
 // Init new google map
 function initMap() {
@@ -165,7 +166,7 @@ function foodMarkers() {
 
     var defaultIcon = markerIcon('ff4000');
 
-    // Highligh icon during hover
+    // Highlight icon during hover
     var highlightedIcon = markerIcon('e7b213');
     // Create info window
     var mapInfoWindow = new google.maps.InfoWindow();
@@ -176,10 +177,13 @@ function foodMarkers() {
         var lat = place.location.latitude;
         var lng = place.location.longitude;
         var position = new google.maps.LatLng(lat, lng);
+        var price = place.price;
 
         var marker = new google.maps.Marker({
             title: title,
             rating: rating,
+            price: price,
+            location: location,
             position: position,
             animation: google.maps.Animation.Drop,
             icon: defaultIcon,
@@ -207,7 +211,59 @@ function foodMarkers() {
     console.log(markers);
 }
 
+function populateInfoWindow(marker, infowindow) {
 
+    // Check to make sure the infowindow is not already opened on this marker.
+    if (infowindow.marker != marker) {
+        
+        infowindow.setContent('');
+        infowindow.marker = marker;
+        // Make sure the marker property is cleared if the infowindow is closed.
+        infowindow.addListener('closeclick', function() {
+            infowindow.marker = null;
+        });
+        // Set Animation on clicked marker
+        marker.setAnimation(google.maps.Animation.BOUNCE);
+        setTimeout(function() {
+            marker.setAnimation(null);
+        }, 850);
+
+        // Create street view variable
+        var streetViewService = new google.maps.StreetViewService();
+
+        // Radius for street view
+        var radius = 50;
+
+
+        // If a pano is found for the location, compute the position of the streetview image, 
+        // heading, and set the pitch for the panorama
+        var getStreetView = function(data, status) {
+            if (status == google.maps.StreetViewStatus.OK) {
+                var nearStreetViewLocation = data.location.latLng;
+                var heading = google.maps.geometry.spherical.computeHeading(
+                    nearStreetViewLocation, marker.position);
+                infowindow.setContent('<div>' + marker.title + '<br>' + '<span>Rating: ' + marker.rating + '</span>' + '<br>' + marker.price + '</div><div id="pano"></div>');
+                var panoramaOptions = {
+                    position: nearStreetViewLocation, 
+                    pov: {
+                        heading: heading, 
+                        pitch: 30
+                    }
+                };
+                var panorama = new google.maps.StreetViewPanorama(
+                    document.getElementById('pano'), panoramaOptions);
+            } else {
+                infowindow.setContent('<div>' + marker.title + '</div>' + '<div>No Street View Found</div>'); 
+            }
+        };
+        // Use streetview service to get the closest streetview image within
+        // 50 meters of the markers position
+        streetViewService.getPanoramaByLocation(marker.position,
+            radius, getStreetView);
+        // Open the infowindow on the correct marker.
+        infowindow.open(map, marker);
+    }
+}
 
 // Create a new marker
 function markerIcon(markerStyle) {
@@ -233,6 +289,7 @@ var ViewModel = function() {
     self.markers = ko.observableArray(markers);
     self.filter = ko.observable();
     self.address = ko.observable();
+    self.price = ko.observable();
 
     // Filter search query in the Are You Hungry Field
     this.listFilter = ko.computed(function() {
