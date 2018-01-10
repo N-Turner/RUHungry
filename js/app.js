@@ -3,7 +3,7 @@ var map;
 // Create blank arrays for markers and places
 var markers = [];
 
-// Init new google map
+// Init new google map with style.
 function initMap() {
 	var styles = [
 	{
@@ -159,6 +159,7 @@ function mapError() {
 	console.log("Sorry, Google Maps had a problem loading");
 };
 
+// Create map markers with info window pushing yelp data.
 function foodMarkers() {
 
     var defaultIcon = markerIcon('ff4000');
@@ -202,7 +203,7 @@ function foodMarkers() {
         });
         marker.addListener('mouseout', function() {
             this.setIcon(defaultIcon);
-        });
+        }); // Close info window when map is clicked.
         google.maps.event.addListener(map, 'click', function() {
             mapInfoWindow.close();
         });
@@ -336,7 +337,7 @@ var ViewModel = function() {
     self.address = ko.observable();
     self.price = ko.observable();
 
-    // Filter search query in the Are You Hungry Field
+    // Filters markers based on search field
     this.listFilter = ko.computed(function() {
         return this.places().filter(function(place) {
             var doesMatch = !self.filter() || place.title.toLowerCase().indexOf(self.filter()) >= 0;
@@ -361,7 +362,5 @@ var ViewModel = function() {
   
 };
 
-
 var vm = new ViewModel(); 
-
 ko.applyBindings(vm);

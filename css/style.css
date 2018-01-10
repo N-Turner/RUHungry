@@ -6,17 +6,6 @@ body {
     padding-top: 25px;
 }
 
-/* Sidebar */
-#list-sidebar {
-    background-color: white;
-    min-width: 255px;
-}
-
-#listed-items {
-    padding: 10px 0;
-
-}
-
 .food {
     margin: 8px 5px 5px 10px;
     color: #fff;
@@ -37,6 +26,17 @@ body {
         width: 200px;
     }
 
+/* Sidebar */
+#list-sidebar {
+    background-color: white;
+    min-width: 255px;
+}
+
+#listed-items {
+    padding: 10px 0;
+
+}
+
 span:hover {
     text-align: center 
     color: #AD2324 
@@ -49,18 +49,10 @@ span:hover {
 /**** Media Query ****/
 
 @media screen and (max-width: 768px) {
-    body {
-        padding-top: 100px;
-    }
-}
 
-@media screen and (min-width: 768px) {
     body {
-      padding-top: 25px;
+      padding-top: 100px;
     }
-}
-
-@media screen and (max-width: 768px) {
 
     #list-sidebar {
       order: 0;
