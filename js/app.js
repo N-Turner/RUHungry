@@ -157,7 +157,7 @@ function initMap() {
 function mapError() {
 	document.getElementById("map").innerHTML = "<h2> Sorry, Google Maps could not load </h2>";
 	console.log("Sorry, Google Maps had a problem loading");
-};
+}
 
 // Create map markers with info window pushing yelp data.
 function foodMarkers() {
@@ -170,7 +170,7 @@ function foodMarkers() {
     var mapInfoWindow = new google.maps.InfoWindow();
     // Loop through locations array in our view model
     vm.places().forEach(function (place, i) {
-        var title = place.title
+        var title = place.title;
         var rating = place.rating;
         var lat = place.location.latitude;
         var lng = place.location.longitude;
@@ -192,9 +192,14 @@ function foodMarkers() {
         markers.push(marker);
 
         place.marker = marker;
-
+        // Open info window when marker is clicked.
         marker.addListener('click', function() {
             populateInfoWindow(this, mapInfoWindow);
+        });
+        // Zoom into marker location when clicked.
+        marker.addListener('click', function() {
+            map.setZoom(18);
+            map.setCenter(marker.getPosition());
         });
 
         // Alternate between highlighted place marker and non-highlighted
@@ -211,7 +216,7 @@ function foodMarkers() {
     });
     console.log(markers);
 
-    };
+    }
 
 // Yelp has phased out v2 of it's API with Yelp Fusion. This Udacity forum was very helpful: https://discussions.udacity.com/t/yelp-v3-implementation/235928
 // Get location data from Yelp via an API call

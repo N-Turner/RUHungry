@@ -22,8 +22,8 @@ body {
 }
 
 #pano {
-        height: 200px;
-        width: 200px;
+    height: 200px;
+    width: 200px;
     }
 
 /* Sidebar */
@@ -51,20 +51,26 @@ span:hover {
 @media screen and (max-width: 768px) {
 
     body {
-      padding-top: 100px;
+        padding-top: 100px;
+    }
+
+    span:hover {
+        cursor:pointer;
+        background-color:yellow;
     }
 
     #list-sidebar {
-      order: 0;
-      width: 100%;
-      height: 250px;
-      position: relative;
+        order: 0;
+        width: 100%;
+        height: 250px;
+        position: relative;
     }
 
     #listed-items {
-    overflow-y: scroll; 
-    width: 60%;
-    margin-left: 20%;
+        overflow-y: scroll; 
+        width: 60%;
+        margin-left: 20%;
+        height: 400px;
     }
 
     #map {
@@ -72,7 +78,7 @@ span:hover {
         padding-bottom: 50px;
         left: 0;
         right: 0;
-        height: 500px;
+        height: 100%;
         width: 100%;
     }
 }
