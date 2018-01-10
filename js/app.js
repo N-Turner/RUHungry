@@ -3,8 +3,6 @@ var map;
 // Create blank arrays for markers and places
 var markers = [];
 
-var placeMarkers = [];
-
 // Init new google map
 function initMap() {
 	var styles = [
